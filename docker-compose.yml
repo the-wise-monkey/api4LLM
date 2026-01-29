@@ -8,10 +8,18 @@ services:
 
     ports:
       - "8317:8317"
+      - "54545:54545"  # Claude OAuth callback port
 
     volumes:
-      - ./config.yaml:/CLIProxyAPI/config.yaml
-      - ./data:/CLIProxyAPI/data
+      # Config file mount
+      - type: bind
+        source: ./config.yaml
+        target: /CLIProxyAPI/config.yaml
+
+      # Persistent auth/token storage (fixes mkdir crash)
+      - type: bind
+        source: ./data
+        target: /CLIProxyAPI/data
 
     environment:
-      - TZ=Asia/Shanghai
+      - TZ=America/Montevideo
