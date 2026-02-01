@@ -1,7 +1,7 @@
 {
-  "name": "cliproxy-wrapper",
+  "name": "api4llm",
   "version": "1.0.0",
-  "description": "Self-hosted Docker wrapper for CLIProxyAPI that enables Claude/Codex subscription logins to be used through a local OpenAI-compatible API proxy.",
+  "description": "Self-hosted Docker wrapper for api4LLM (CLIProxyAPI) that enables Claude/Codex subscription logins to be used through a local OpenAI-compatible API proxy.",
   "scripts": {
     "start": "docker compose up -d --build",
     "stop": "docker compose down",

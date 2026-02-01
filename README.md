@@ -1,4 +1,4 @@
-# CLIProxyAPI Wrapper
+# api4LLM Wrapper
 
 Self-hosted Docker wrapper for [CLIProxyAPI](https://github.com/edlsh/ai-cli-proxy-api) that enables Claude/Codex subscription logins to be used through a local OpenAI-compatible API proxy — no official API keys required.
 
@@ -11,8 +11,8 @@ Self-hosted Docker wrapper for [CLIProxyAPI](https://github.com/edlsh/ai-cli-pro
 
 1. **Clone with submodules**
    ```bash
-   git clone --recurse-submodules https://github.com/the-wise-monkey/CLIProxyAPI.git
-   cd CLIProxyAPI
+   git clone --recurse-submodules https://github.com/the-wise-monkey/api4LLM.git
+   cd api4LLM
    ```
 
 2. **Start the container**
@@ -22,7 +22,7 @@ Self-hosted Docker wrapper for [CLIProxyAPI](https://github.com/edlsh/ai-cli-pro
 
 3. **Login to Claude** (first time only)
    ```bash
-   docker exec -it cliproxyapi ./CLIProxyAPI --claude-login
+   docker exec -it api4llm ./CLIProxyAPI --claude-login
    ```
 
 4. **Use the API** at `http://localhost:8317`

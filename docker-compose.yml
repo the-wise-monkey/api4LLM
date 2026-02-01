@@ -1,10 +1,10 @@
 services:
-  cliproxyapi:
-    container_name: cliproxyapi
+  api4llm:
+    container_name: api4llm
     restart: unless-stopped
 
     build: ./CLIProxyAPI
-    image: cliproxyapi:latest
+    image: api4llm:latest
 
     ports:
       - "8317:8317"
