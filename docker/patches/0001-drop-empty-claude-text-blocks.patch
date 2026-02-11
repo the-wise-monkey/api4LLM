@@ -1,0 +1,35 @@
+diff --git a/internal/translator/claude/openai/chat-completions/claude_openai_request.go b/internal/translator/claude/openai/chat-completions/claude_openai_request.go
+index b3384ec..d3a9fe5 100644
+--- a/internal/translator/claude/openai/chat-completions/claude_openai_request.go
++++ b/internal/translator/claude/openai/chat-completions/claude_openai_request.go
+@@ -169,9 +169,14 @@ func ConvertOpenAIRequestToClaude(modelName string, inputRawJSON []byte, stream
+ 						switch partType {
+ 						case "text":
+ 							// Text part conversion
++							text := part.Get("text").String()
++							if text == "" {
++								// Anthropic rejects empty text content blocks.
++								break
++							}
+ 							contentParts = append(contentParts, map[string]interface{}{
+ 								"type": "text",
+-								"text": part.Get("text").String(),
++								"text": text,
+ 							})
+ 
+ 						case "image_url":
+diff --git a/internal/translator/claude/openai/responses/claude_openai-responses_request.go b/internal/translator/claude/openai/responses/claude_openai-responses_request.go
+index 764bb5c..9d4210c 100644
+--- a/internal/translator/claude/openai/responses/claude_openai-responses_request.go
++++ b/internal/translator/claude/openai/responses/claude_openai-responses_request.go
+@@ -155,6 +155,10 @@ func ConvertOpenAIResponsesRequestToClaude(modelName string, inputRawJSON []byte
+ 						case "input_text", "output_text":
+ 							if t := part.Get("text"); t.Exists() {
+ 								txt := t.String()
++								if txt == "" {
++									// Anthropic rejects empty text content blocks.
++									break
++								}
+ 								textAggregate.WriteString(txt)
+ 								contentPart := `{"type":"text","text":""}`
+ 								contentPart, _ = sjson.Set(contentPart, "text", txt)

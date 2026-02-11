@@ -3,7 +3,9 @@ services:
     container_name: api4llm
     restart: unless-stopped
 
-    build: ./CLIProxyAPI
+    build:
+      context: .
+      dockerfile: Dockerfile.api4llm
     image: api4llm:latest
 
     ports:
