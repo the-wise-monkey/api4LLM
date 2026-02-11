@@ -9,6 +9,7 @@ services:
     ports:
       - "8317:8317"
       - "54545:54545"  # Claude OAuth callback port
+      - "1455:1455"    # Codex/OpenAI OAuth callback port
 
     volumes:
       # Config file mount

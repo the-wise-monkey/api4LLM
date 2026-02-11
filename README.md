@@ -71,6 +71,7 @@ NPM shortcuts:
 | Port | Service | Notes |
 |---|---|---|
 | `8317` | `api4llm` | OpenAI-compatible API endpoint |
+| `1455` | `api4llm` | Codex/OpenAI OAuth callback |
 | `54545` | `api4llm` | Claude OAuth callback |
 | `9321` | `diagnostics` | Dashboard (bound to localhost in Compose) |
 
