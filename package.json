@@ -6,6 +6,8 @@
     "start": "docker compose up -d --build",
     "stop": "docker compose down",
     "logs": "docker compose logs -f",
-    "restart": "docker compose restart"
+    "restart": "docker compose restart",
+    "dashboard": "node diagnostics/server.mjs",
+    "dashboard:dev": "DIAG_PORT=9321 node diagnostics/server.mjs"
   }
 }

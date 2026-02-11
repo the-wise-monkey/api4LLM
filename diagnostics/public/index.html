@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>api4LLM Diagnostics</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="bg-noise"></div>
+    <main class="app">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Operations Console</p>
+          <h1>api4LLM Diagnostics</h1>
+          <p id="lastUpdated" class="muted">Waiting for first refresh...</p>
+        </div>
+        <div class="actions">
+          <button data-action="start">Start</button>
+          <button data-action="restart">Restart</button>
+          <button data-action="stop" class="danger">Stop</button>
+          <button id="refreshNow" class="ghost">Refresh Now</button>
+        </div>
+      </header>
+
+      <section class="status-grid" id="statusGrid">
+        <article class="card">
+          <p class="card-label">Primary Service</p>
+          <h2 id="serviceName">-</h2>
+          <p id="serviceState" class="chip">Unknown</p>
+        </article>
+        <article class="card">
+          <p class="card-label">Container</p>
+          <h2 id="containerName">-</h2>
+          <p id="containerStatus" class="muted">-</p>
+        </article>
+        <article class="card">
+          <p class="card-label">Image</p>
+          <h2 id="imageName">-</h2>
+          <p id="runningFor" class="muted">-</p>
+        </article>
+        <article class="card">
+          <p class="card-label">Compose Health</p>
+          <h2 id="dockerHealth">-</h2>
+          <p id="composeFilePath" class="muted">-</p>
+        </article>
+      </section>
+
+      <section class="ops-grid">
+        <section class="panel health-panel">
+          <div class="panel-header">
+            <h3>Provider Health</h3>
+            <span id="providerMeta" class="muted">-</span>
+          </div>
+          <div id="providerCards" class="provider-grid"></div>
+          <div class="oauth-panel">
+            <h4>Discovered OAuth Files</h4>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Provider</th>
+                    <th>Email / Account</th>
+                    <th>File</th>
+                    <th>Expires</th>
+                    <th>Updated</th>
+                  </tr>
+                </thead>
+                <tbody id="oauthRows">
+                  <tr>
+                    <td colspan="5" class="muted">No auth files discovered yet.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel auth-panel">
+          <div class="panel-header">
+            <h3>Authentication Mechanisms</h3>
+            <span id="authMeta" class="muted">-</span>
+          </div>
+          <div id="mechanismCards" class="mechanism-grid"></div>
+        </section>
+
+        <section class="panel models-panel">
+          <div class="panel-header">
+            <h3>Provider Models</h3>
+            <span id="modelMeta" class="muted">Loading model catalog...</span>
+          </div>
+          <div id="modelCards" class="model-grid"></div>
+        </section>
+      </section>
+
+      <section class="panel logs-panel">
+        <div class="panel-header">
+          <h3>Live Container Logs</h3>
+          <div class="logs-controls">
+            <label>
+              <input type="checkbox" id="autoScroll" checked />
+              Auto-scroll
+            </label>
+            <button id="clearLogs" class="ghost">Clear View</button>
+            <span id="logsState" class="muted">Connecting...</span>
+          </div>
+        </div>
+        <pre id="logsOutput" aria-live="polite"></pre>
+      </section>
+    </main>
+
+    <section id="resolutionGate" class="resolution-gate" hidden>
+      <article class="resolution-card">
+        <p class="eyebrow">Screen Too Small</p>
+        <h2>Minimum resolution is 1366x768</h2>
+        <p class="muted">Resize your browser window or use a larger display to access this operational dashboard.</p>
+        <p id="resolutionCurrent" class="resolution-current">Current viewport: -</p>
+      </article>
+    </section>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>

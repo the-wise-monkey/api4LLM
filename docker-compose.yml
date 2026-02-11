@@ -23,3 +23,40 @@ services:
 
     environment:
       - TZ=America/Montevideo
+
+  diagnostics:
+    container_name: api4llm-diagnostics
+    restart: unless-stopped
+
+    build:
+      context: .
+      dockerfile: diagnostics/Dockerfile
+    image: api4llm-diagnostics:latest
+
+    depends_on:
+      - api4llm
+
+    ports:
+      - "127.0.0.1:9321:9321"
+
+    volumes:
+      - type: bind
+        source: ./config.yaml
+        target: /app/config.yaml
+        read_only: true
+      - type: bind
+        source: ./data
+        target: /app/data
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+
+    environment:
+      - DIAG_ALLOW_REMOTE=true
+      - DIAG_CONFIG_FILE=/app/config.yaml
+      - DIAG_CONTAINER=api4llm
+      - DIAG_DATA_DIR=/app/data
+      - DIAG_DOCKER_MODE=container
+      - DIAG_HOST=0.0.0.0
+      - DIAG_PORT=9321
+      - DIAG_SERVICE=api4llm
