@@ -51,6 +51,9 @@ services:
         source: ./data
         target: /app/data
       - type: bind
+        source: ./diagnostics
+        target: /app/diagnostics
+      - type: bind
         source: /var/run/docker.sock
         target: /var/run/docker.sock
 
