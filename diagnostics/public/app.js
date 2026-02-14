@@ -329,16 +329,14 @@ function renderProviderModelCards(payload) {
   const rows = groups
     .map((group) => {
       const models = group.models || [];
-      const shown = models.slice(0, 8);
-      const hiddenCount = Math.max(0, models.length - shown.length);
-      const preview = shown.map((model) => model.id).join(", ");
+      const preview = models.map((model) => model.id).join(", ");
       const sources = [...new Set(models.flatMap((model) => model.sources || []))].join(", ");
 
       return `
         <tr>
           <td>${escapeHTML(group.label || group.provider || "unknown")}</td>
           <td>${formatCount(group.count)}</td>
-          <td class="cell-wrap" title="${escapeHTML(preview || "-")}">${escapeHTML(preview || "-")}${hiddenCount > 0 ? ` <span class="cell-muted">(+${hiddenCount})</span>` : ""}</td>
+          <td class="cell-wrap" title="${escapeHTML(preview || "-")}">${escapeHTML(preview || "-")}</td>
           <td class="cell-muted">${escapeHTML(sources || "-")}</td>
         </tr>
       `;
